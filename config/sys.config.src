@@ -1,0 +1,3 @@
+[{cowboy_auth_example,[
+    {port, 8000}
+]}].
