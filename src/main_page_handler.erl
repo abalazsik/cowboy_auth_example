@@ -21,6 +21,7 @@ serve(Req, State) ->
                 <<"<html>
                     <head><title>Welcome!</title></head>
                     <body><div>
+                        <a style=\"float:right\" href=\"\\logout\">logout</a>
                         <h1>Welcome ">>, sessiondata:getUsername(Session) ,<<"!</h1>">>,
                         roles(sessiondata:getRoles(Session)),
                     <<"</div></body>

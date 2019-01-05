@@ -2,6 +2,7 @@ cowboy_auth_example
 =====
 
 Cowboy Authentication & Authorization Example
+
 In this example you can see:
 - login + authentication
 - (self-made) session handling

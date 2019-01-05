@@ -13,6 +13,7 @@ init(Config) when is_map(Config) ->
 
     Dispatch = cowboy_router:compile([{'_',[
         {"/login", login_handler,#{}},
+        {"/logout", logout_handler,#{}},
         {"/login.html", cowboy_static, {priv_file, cowboy_auth_example, "login.html"}},
         {"/role2.html", cowboy_static, {priv_file, cowboy_auth_example, "role2.html"}},
         {"/", main_page_handler, #{}},

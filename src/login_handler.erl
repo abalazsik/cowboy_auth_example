@@ -22,14 +22,12 @@ serve(Req, State) ->
             {Ip, _} = cowboy_req:peer(Req),
             case websession:authenticate(Username,Password,Ip) of
                 authentication_failed ->
-                    util:redirect("/login.html", Req, State);
+                    util:redirectAsResponse("/login.html", Req, State);
                 Session ->
                     SessionId = sessiondata:getSessionId(Session),
                     Req1 = cowboy_req:set_resp_cookie(auth_middleware:getCookieName(), SessionId, Req, #{max_age => 3600}),
-                    util:redirect("/", Req1, State)
+                    util:redirectAsResponse("/", Req1, State)
             end;
-        <<"OPTIONS">> ->
-            {true, Req, State};
         _ ->
             {stop, Req, State}
     end.

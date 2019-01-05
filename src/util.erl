@@ -1,20 +1,24 @@
 -module(util).
 -export([
-	redirect/3,
+	redirectAsResponse/2,
+	redirectAsResponse/3,
 	redirect/2,
 	forbidden/1,
+	getCookie/3,
 	getSessionData/1
 ]).
 
-%%for handlers
-redirect(ToUrl, Req, State) ->
-	Req1 = cowboy_req:set_resp_header(<<"location">>, ToUrl, Req),
-	{stop, cowboy_req:reply(303, Req1), State}.
-
-%%for middlewares
 redirect(ToUrl, Req) ->
 	Req1 = cowboy_req:set_resp_header(<<"location">>, ToUrl, Req),
-	{stop, cowboy_req:reply(303, Req1)}.
+	cowboy_req:reply(303, Req1).
+
+%%for middlewares
+redirectAsResponse(ToUrl, Req) ->
+	{stop, redirect(ToUrl,Req)}.
+
+%%for handlers
+redirectAsResponse(ToUrl, Req, State) ->
+	{stop, redirect(ToUrl,Req), State}.
 
 %%for middlewares
 forbidden(Req) ->

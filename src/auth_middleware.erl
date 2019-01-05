@@ -15,7 +15,7 @@ execute(Req, Env) ->
       false ->
         case util:getSessionData(Req) of
             invalid ->
-                util:redirect("/login.html", Req);
+                util:redirectAsResponse("/login.html", Req);
             _->
                 {ok, Req, Env}
         end
